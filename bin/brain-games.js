@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-import readlineSync from cli.js;
+import readlineSync from 'readline-sync';
