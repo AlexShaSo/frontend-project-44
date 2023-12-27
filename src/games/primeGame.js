@@ -14,13 +14,18 @@ const isNumberPrime = (number) => {
     return true;
   };
 
-const getRandomNumber = (minNumber, maxNumber) => {
-    let minNumber = 2;
-    let maxNumber = 151;
-}
+    const minNumber = 2;
+    const maxNumber = 151;
+
+const getAnswer = () => {
+    const question = getRandomNumber(minNumber, maxNumber);
+    const expectedAnswer = isNumberPrime(question) ? 'yes' : 'no';
+
+    return [question, expectedAnswer];
+};
 
 const startPrimeGame = () => {
-    createGameLogic(description, getQuestionAndAnswer);
+    createGameLogic(description, getAnswer);
   };
+
   export default startPrimeGame;
-//простое число делится только на себя и на единицу
