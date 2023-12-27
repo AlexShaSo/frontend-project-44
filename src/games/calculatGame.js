@@ -11,13 +11,13 @@ const maxNumber = 25;
 const calc = (firstValue, secondValue, mark) => {
   switch (mark) {
     case '+':
-      return String(firstValue + secondValue);
+      return (firstValue + secondValue);
     case '-':
-      return String(firstValue - secondValue);
+      return (firstValue - secondValue);
     case '*':
-      return String(firstValue * secondValue);
+      return (firstValue * secondValue);
     default:
-      throw new Error(`operation ${mark} is not supported`);
+      `operation ${mark} is not supported`;
   }
 };
 

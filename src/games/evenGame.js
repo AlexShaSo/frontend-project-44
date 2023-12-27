@@ -7,12 +7,12 @@ const minNumber = 1;
 const maxNumber = 25;
 const isEven = (number) => number % 2 === 0;
 
-const evenLogic = () => {
+const getEvenLogic = () => {
   const question = getRandomNumber(minNumber, maxNumber);
   const answer = isEven(question) ? 'yes' : 'no';
   return [question, answer];
 };
 const startEvenGame = () => {
-  createGameLogic(description, evenLogic);
+  createGameLogic(description, getEvenLogic);
 };
 export default startEvenGame;
