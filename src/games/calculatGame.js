@@ -17,7 +17,7 @@ const calc = (firstValue, secondValue, mark) => {
     case '*':
       return (firstValue * secondValue);
     default:
-      `operation ${mark} is not supported`;
+      return `operation ${mark} is not supported`;
   }
 };
 
