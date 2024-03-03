@@ -1,29 +1,30 @@
 #!/usr/bin/env node
 
 import getRandomNumber from '../getRandomNumber.js';
-import createGameLogic from '../index.js';
+import runGame from '../index.js';
 
-const description = 'Find the greatest common divisor of given numbers.';
-const minNumber = 1;
-const maxNumber = 50;
-const getGcd = (x, y) => {
-  if (y === 0) {
-    return x;
+const description = 'Find the greatest common divisor of given numbers';
+
+const getGreatestCommonDivisor = (firstItem, secondItem) => {
+  if (firstItem === 0 || secondItem === 0) {
+    return firstItem + secondItem;
   }
-  return getGcd(y, x % y);
+  if (firstItem > secondItem) {
+    return getGreatestCommonDivisor(firstItem - secondItem, secondItem);
+  }
+  return getGreatestCommonDivisor(firstItem, secondItem - firstItem);
 };
 
 const getQuestionAndAnswer = () => {
-  const firstValue = getRandomNumber(minNumber, maxNumber);
-  const secondValue = getRandomNumber(minNumber, maxNumber);
+  const firstNumber = getRandomNumber(1, 50);
+  const secondNubmer = getRandomNumber(1, 50);
 
-  const question = `${firstValue} ${secondValue}`;
+  const question = `${firstNumber} ${secondNubmer}`;
+  const correctAnswer = String(getGreatestCommonDivisor(firstNumber, secondNubmer));
 
-  const expectedAnswer = getGcd(firstValue, secondValue);
-
-  return [question, String(expectedAnswer)];
+  return [question, correctAnswer];
 };
-const startGcdGame = () => {
-  createGameLogic(description, getQuestionAndAnswer);
+
+export default () => {
+  runGame(description, getQuestionAndAnswer);
 };
-export default startGcdGame;

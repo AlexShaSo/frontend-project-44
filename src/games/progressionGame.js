@@ -1,32 +1,34 @@
 #!/usr/bin/env node
 
 import getRandomNumber from '../getRandomNumber.js';
-import createGameLogic from '../index.js';
+import runGame from '../index.js';
 
+const progressionLength = 10;
 const description = 'What number is missing in the progression?';
 
-const firstNumber = 1;
-const finalNumber = 10;
-const question = getRandomNumber(firstNumber, finalNumber);
-const multiplierNumber = 8;
-const multiplier = getRandomNumber(firstNumber, multiplierNumber);
-const createProgression = [];
-for (let i = question; createProgression.length < 10; i += multiplier) {
-  createProgression.push(i);
-}
-const getProgressionGame = () => {
-  const fullyProgression = () => {
-    const full = Math.floor(Math.random() * createProgression.length);
-    return createProgression[full];
-  };
+const getArithmeticProgression = () => {
+  let progressionNumber = getRandomNumber(0, 50);
+  const step = getRandomNumber(2, 5);
+  const progression = [];
 
-  const expectedAnswer = fullyProgression(createProgression);
-
-  const hiddenNumber = createProgression.indexOf(expectedAnswer);
-  createProgression[hiddenNumber] = '..';
-  return [question, expectedAnswer];
+  for (let i = 0; i < progressionLength; i += 1) {
+    progression.push(progressionNumber);
+    progressionNumber += step;
+  }
+  return progression;
 };
 
-const startProgressionGame = () => createGameLogic(description, getProgressionGame);
+const getQuestionAndAnswer = () => {
+  const progression = getArithmeticProgression();
+  const randomIndex = getRandomNumber(0, progressionLength);
 
-export default startProgressionGame;
+  const correctAnswer = String(progression[randomIndex]);
+  progression[randomIndex] = '..';
+  const question = progression;
+
+  return [question, correctAnswer];
+};
+
+export default () => {
+  runGame(description, getQuestionAndAnswer);
+};

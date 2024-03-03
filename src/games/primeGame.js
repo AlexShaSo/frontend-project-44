@@ -1,31 +1,26 @@
 #!/usr/bin/env node
 
 import getRandomNumber from '../getRandomNumber.js';
-import createGameLogic from '../index.js';
+import runGame from '../index.js';
 
-const description = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
-const isNumberPrime = (number) => {
-  for (let i = 2; i < number; i += 1) {
-    if (number % i === 0) {
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no"';
+
+const isPrimeNumber = (number) => {
+  for (let a = 2; a < number; a += 1) {
+    if (number % a === 0) {
       return false;
     }
   }
-
   return true;
 };
 
-const minNumber = 2;
-const maxNumber = 151;
+const getQuestionAndAnswer = () => {
+  const question = getRandomNumber(2, 50);
+  const correctAnswer = isPrimeNumber(question) ? 'yes' : 'no';
 
-const getAnswer = () => {
-  const question = getRandomNumber(minNumber, maxNumber);
-  const expectedAnswer = isNumberPrime(question) ? 'yes' : 'no';
-
-  return [question, expectedAnswer];
+  return [question, correctAnswer];
 };
 
-const startPrimeGame = () => {
-  createGameLogic(description, getAnswer);
+export default () => {
+  runGame(description, getQuestionAndAnswer);
 };
-
-export default startPrimeGame;

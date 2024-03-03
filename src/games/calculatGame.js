@@ -1,37 +1,38 @@
 #!/usr/bin/env node
 
 import getRandomNumber from '../getRandomNumber.js';
-import createGameLogic from '../index.js';
+import runGame from '../index.js';
 
+const operationSymbols = ['+', '-', '*'];
 const description = 'What is the result of the expression?';
-const marks = ['+', '-', '*'];
-const minNumber = 0;
-const maxNumber = 25;
 
-const calc = (firstValue, secondValue, mark) => {
-  switch (mark) {
-    case '+':
-      return (firstValue + secondValue);
-    case '-':
-      return (firstValue - secondValue);
-    case '*':
-      return (firstValue * secondValue);
-    default:
-      return `operation ${mark} is not supported`;
+const getRandomOperationSymbol = (symbols) => {
+  const symbolsLength = symbols.length;
+  const randomIndex = getRandomNumber(0, symbolsLength);
+  const randomSymbol = symbols[randomIndex];
+  return randomSymbol;
+};
+
+const calcArithmeticOperation = (symbol, firstValue, secondValue) => {
+  switch (symbol) {
+    case '+': return firstValue + secondValue;
+    case '-': return firstValue - secondValue;
+    case '*': return firstValue * secondValue;
+    default: return null;
   }
 };
 
-const calcLogic = () => {
-  const firstValue = getRandomNumber(minNumber, maxNumber);
-  const secondValue = getRandomNumber(minNumber, maxNumber);
-  const mark = marks[getRandomNumber(0, marks.length - 1)];
-  const answer = String(calc(firstValue, secondValue, mark));
-  const question = `${firstValue} ${mark} ${secondValue}`;
-  return [question, answer];
+const getQuestionAndAnswer = () => {
+  const randomSymbol = getRandomOperationSymbol(operationSymbols);
+  const firstNumber = getRandomNumber(0, 10);
+  const secondNubmer = getRandomNumber(0, 10);
+
+  const question = `${firstNumber} ${randomSymbol} ${secondNubmer}`;
+  const correctAnswer = String(calcArithmeticOperation(randomSymbol, firstNumber, secondNubmer));
+
+  return [question, correctAnswer];
 };
 
-const startCalcGame = () => {
-  createGameLogic(description, calcLogic);
+export default () => {
+  runGame(description, getQuestionAndAnswer);
 };
-
-export default startCalcGame;
