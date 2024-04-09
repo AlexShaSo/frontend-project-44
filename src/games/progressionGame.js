@@ -3,7 +3,6 @@
 import getRandomNumber from '../getRandomNumber.js';
 import runGame from '../index.js';
 
-
 const description = 'What number is missing in the progression?';
 
 const getProgression = (start, step, length) => {
@@ -26,7 +25,6 @@ const getQuestionAndAnswer = () => {
   const question = progression.join(' ');
   return [question, String(answer)];
 };
-
 
 export default () => {
   runGame(description, getQuestionAndAnswer);
