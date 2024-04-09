@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+//
 import getRandomNumber from '../getRandomNumber.js';
 import runGame from '../index.js';
 
